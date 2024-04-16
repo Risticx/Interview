@@ -11,10 +11,11 @@ namespace Application.Transaction.Commands
             TransactionRepository = transactionRepository;
         }
 
-        public void handle(decimal amount, string message, string currency, int status) 
+        public string? Handle(decimal amount, string message, string currency, int status) 
         {
             Domain.Entities.Transaction t = new Domain.Entities.Transaction(amount, message, currency, status);
             TransactionRepository.save(t);
+            return t.Id;
         }
     }
 }

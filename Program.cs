@@ -1,5 +1,7 @@
+using Application.Transaction.Commands;
 using Application.User.Commands;
 using Application.User.Queries;
+using Application.Validator;
 using Domain.Repositories;
 using Infrastructure;
 using Infrastructure.Repositories;
@@ -17,6 +19,9 @@ builder.Services.AddScoped<ITransactionRepository, EFTransactionRepository>();
 builder.Services.AddScoped<IUserRepository, EFUserRepository>();
 builder.Services.AddScoped<GetUserQuery>();
 builder.Services.AddScoped<CreateUserCommand>();
+builder.Services.AddScoped<CreateTransactionCommand>();
+builder.Services.AddScoped<HashValidator>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

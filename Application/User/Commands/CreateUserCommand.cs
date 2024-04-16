@@ -12,7 +12,7 @@ namespace Application.User.Commands
             UserRepository = userRepository;
         }
 
-        public void handle(string username, string name, string lastname, string email) 
+        public void Handle(string username, string name, string lastname, string email) 
         {
             if(UserRepository.userExistsByEmail(email))
                 throw new UserExistsByEmailException();

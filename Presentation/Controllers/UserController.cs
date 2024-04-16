@@ -21,10 +21,10 @@ namespace Presentation.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public ActionResult getUser(string id)
+        public ActionResult GetUser(string id)
         {
             try {
-                return Ok(GetUserQuery.getById(id));
+                return Ok(GetUserQuery.GetById(id));
             } catch (UserNotFoundException e) {
                 return NotFound(e.Message);
             }
@@ -32,10 +32,10 @@ namespace Presentation.Controllers
 
         [Route("{username}/{name}/{lastname}/{email}")]
         [HttpPost]
-        public ActionResult<User> createUser(string username, string name, string lastname, string email)
+        public ActionResult<User> CreateUser(string username, string name, string lastname, string email)
         {
             try {
-                CreateUserCommand.handle(username, name, lastname, email);
+                CreateUserCommand.Handle(username, name, lastname, email);
             } catch (UserExistsByEmailException e) {
                 return NotFound(e.Message);
             }
