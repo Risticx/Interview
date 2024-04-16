@@ -11,7 +11,6 @@ namespace Application.User.Commands
         {
             UserRepository = userRepository;
         }
-
         public void Handle(string username, string name, string lastname, string email) 
         {
             if(UserRepository.userExistsByEmail(email))

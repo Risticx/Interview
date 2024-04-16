@@ -24,11 +24,9 @@ namespace Presentation.Controllers
         private GetUserQuery GetUserQuery;
         private UserExistsByIdQuery UserExistsByIdQuery;
         private CurrencyExistsByLabelQuery CurrencyExistsByLabelQuery;
-        private readonly ILogger<TransactionController> _logger;
-        
-        public TransactionController(ILogger<TransactionController> logger, CurrencyExistsByLabelQuery currencyExistsByLabelQuery, UserExistsByIdQuery userExistsByIdQuery, CreateTransactionCommand createTransactionCommand, AddTransactionToUserCommand addTransactionToUserCommand, HashValidator hashValidator, GetCurrencyQuery getCurrencyQuery, GetTransactionQuery getTransactionQuery, GetUserQuery getUserQuery)
+
+        public TransactionController(CurrencyExistsByLabelQuery currencyExistsByLabelQuery, UserExistsByIdQuery userExistsByIdQuery, CreateTransactionCommand createTransactionCommand, AddTransactionToUserCommand addTransactionToUserCommand, HashValidator hashValidator, GetCurrencyQuery getCurrencyQuery, GetTransactionQuery getTransactionQuery, GetUserQuery getUserQuery)
         {
-            _logger = logger;
             CurrencyExistsByLabelQuery = currencyExistsByLabelQuery;
             UserExistsByIdQuery = userExistsByIdQuery;
             CreateTransactionCommand = createTransactionCommand;
@@ -76,11 +74,14 @@ namespace Presentation.Controllers
 
                 response.Status = TransactionStatus.Success;
                 response.Message = "Transaction proceed successfully.";
+
                 Currency c = GetCurrencyQuery.GetByLabel(transactionRequest.Currency);
                 string? tId = CreateTransactionCommand.Handle(transactionRequest.Amount, c, response.Message, (int)response.Status);
+
                 Transaction t = GetTransactionQuery.GetById(tId!);
                 User u = GetUserQuery.GetById(transactionRequest.UserId);
                 AddTransactionToUserCommand.AddTransactionToUser(u, t);
+                
                 response.TransactionId = tId;
 
                 return Ok(response);

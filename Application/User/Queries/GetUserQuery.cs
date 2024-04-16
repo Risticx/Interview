@@ -10,7 +10,6 @@ namespace Application.User.Queries
         {
             UserRepository = userRepository;
         }
-
         public Domain.Entities.User GetById(string id)
         {
             return UserRepository.getById(id);

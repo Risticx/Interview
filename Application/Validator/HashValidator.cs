@@ -10,7 +10,7 @@ namespace Application.Validator
 
         public string ValidateHash(string externalTransactionId, string userId, decimal amount, string currency) 
         {
-
+            
             if (SecretKey == null)
             {
                 throw new InvalidOperationException("SecretKey is not set.");

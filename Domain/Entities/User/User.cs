@@ -31,6 +31,5 @@ namespace Domain.Entities
             Email = email;
             UserTransactions = new List<Transaction>();
         }
-        
     }
 }

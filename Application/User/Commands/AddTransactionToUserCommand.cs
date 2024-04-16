@@ -11,10 +11,8 @@ namespace Application.User.Commands
         {
             UserRepository = userRepository;
         }
-
         public void AddTransactionToUser(Domain.Entities.User user, Domain.Entities.Transaction t) 
         {
-
             if(!UserRepository.userExistsById(user.Id!))
                 throw new UserNotFoundException();
 

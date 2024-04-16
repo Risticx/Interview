@@ -41,7 +41,5 @@ namespace Infrastructure.Repositories
             Context.Users.Add(u);
             Context.SaveChanges();
         }
-
-        
     }
 }

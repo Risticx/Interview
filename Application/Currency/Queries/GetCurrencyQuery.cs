@@ -10,7 +10,6 @@ namespace Application.Currency.Queries
         {
             CurrencyRepository = currencyRepository;
         }
-
         public Domain.Entities.Currency GetByLabel(string label) 
         {
             return CurrencyRepository.getByLabel(label);

@@ -11,7 +11,8 @@ namespace Application.Transaction.Response {
         public string? Message { get; set; }
         public TransactionStatus Status { get; set; }
         public TransactionResponse() {}
-        public TransactionResponse(string transactionId, string message, int status) {
+        public TransactionResponse(string transactionId, string message, int status) 
+        {
             TransactionId = transactionId;
             Message = message;
             Status = (TransactionStatus)status;

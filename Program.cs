@@ -19,6 +19,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Interview"));
 });
+
 builder.Services.AddScoped<ITransactionRepository, EFTransactionRepository>();
 builder.Services.AddScoped<IUserRepository, EFUserRepository>();
 builder.Services.AddScoped<ICurrencyRepository, EFCurrencyRepository>();
@@ -51,6 +52,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+var loggerFactory = app.Services.GetService<ILoggerFactory>();
+loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString());    
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

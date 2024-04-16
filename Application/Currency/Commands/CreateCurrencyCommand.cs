@@ -11,7 +11,6 @@ namespace Application.Currency.Commands
         {
             CurrencyRepository = currencyRepository;
         }
-
         public void Handle(string label) 
         {
             if(CurrencyRepository.currencyExistsByLabel(label))

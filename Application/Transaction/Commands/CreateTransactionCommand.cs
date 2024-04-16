@@ -11,7 +11,6 @@ namespace Application.Transaction.Commands
         {
             TransactionRepository = transactionRepository;
         }
-
         public string? Handle(decimal amount, Domain.Entities.Currency currency, string message, int status) 
         {
             Domain.Entities.Transaction t = new Domain.Entities.Transaction(amount, currency, message, status);

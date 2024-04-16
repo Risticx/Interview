@@ -13,15 +13,16 @@ namespace Domain.Entities
         public decimal Amount { get; private set; }
 
         [Required]
-        public Currency Currency { get; private set; }
+        public Currency? Currency { get; private set; }
 
         [Required]
-        public string Message{ get; private set; }
+        public string? Message{ get; private set; }
 
         [Required]
         public int Status { get; private set; }
 
         public Transaction() {}
+
         public Transaction(decimal amount, Currency currency, string message, int status)
         {
             Amount = amount;

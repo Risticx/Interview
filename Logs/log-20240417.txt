@@ -1,0 +1,175 @@
+2024-04-17T01:01:31.4976683+02:00  [INF] Now listening on: "https://localhost:7144" (d826f4b8)
+2024-04-17T01:01:31.5022000+02:00  [INF] Now listening on: "http://localhost:5170" (d826f4b8)
+2024-04-17T01:01:31.5129553+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2024-04-17T01:01:31.5141157+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2024-04-17T01:01:31.5141908+02:00  [INF] Content root path: "C:\Users\Ristic~\Desktop\Interview\" (b5d60022)
+2024-04-17T01:01:39.6013983+02:00 0HN2UD4K1FF2F:0000000F [INF] Request:
+Protocol: HTTP/2
+Method: POST
+Scheme: https
+PathBase: 
+Path: /createTransaction
+Accept: text/plain
+Host: localhost:7144
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9,sr;q=0.8
+Content-Type: application/json
+Origin: [Redacted]
+Referer: [Redacted]
+Content-Length: 100
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+hash: 123
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted] (893de8da)
+2024-04-17T01:01:40.3318820+02:00 0HN2UD4K1FF2F:0000000F [INF] Entity Framework Core "6.0.0" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer":"6.0.0"' with options: "None" (d2805559)
+2024-04-17T01:01:40.3489364+02:00 0HN2UD4K1FF2F:0000000F [INF] RequestBody: "{
+  \"externalTransactionId\": \"string\",
+  \"userId\": \"string\",
+  \"amount\": 0,
+  \"currency\": \"string\"
+}" (6d42d084)
+2024-04-17T01:01:40.9860466+02:00 0HN2UD4K1FF2F:0000000F [INF] Response:
+StatusCode: 400
+Content-Type: application/json; charset=utf-8 (999214c4)
+2024-04-17T01:01:40.9873635+02:00 0HN2UD4K1FF2F:0000000F [INF] ResponseBody: "{\"transactionId\":null,\"message\":\"User not found.\",\"status\":1}" (c7a8e6fd)
+2024-04-17T01:01:53.9374269+02:00 0HN2UD4K1FF2F:00000011 [INF] Request:
+Protocol: HTTP/2
+Method: POST
+Scheme: https
+PathBase: 
+Path: /createTransaction
+Accept: text/plain
+Host: localhost:7144
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9,sr;q=0.8
+Content-Type: application/json
+Origin: [Redacted]
+Referer: [Redacted]
+Content-Length: 130
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+hash: 123
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted] (893de8da)
+2024-04-17T01:01:53.9941441+02:00 0HN2UD4K1FF2F:00000011 [INF] Entity Framework Core "6.0.0" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer":"6.0.0"' with options: "None" (d2805559)
+2024-04-17T01:01:53.9962742+02:00 0HN2UD4K1FF2F:00000011 [INF] RequestBody: "{
+  \"externalTransactionId\": \"string\",
+  \"userId\": \"8615a2df-a743-440c-8dd1-1405b4b79405\",
+  \"amount\": 0,
+  \"currency\": \"string\"
+}" (6d42d084)
+2024-04-17T01:01:54.0201601+02:00 0HN2UD4K1FF2F:00000011 [INF] Response:
+StatusCode: 400
+Content-Type: application/json; charset=utf-8 (999214c4)
+2024-04-17T01:01:54.0205041+02:00 0HN2UD4K1FF2F:00000011 [INF] ResponseBody: "{\"transactionId\":null,\"message\":\"Currency not found.\",\"status\":2}" (c7a8e6fd)
+2024-04-17T01:02:02.1356163+02:00 0HN2UD4K1FF2F:00000013 [INF] Request:
+Protocol: HTTP/2
+Method: POST
+Scheme: https
+PathBase: 
+Path: /createTransaction
+Accept: text/plain
+Host: localhost:7144
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9,sr;q=0.8
+Content-Type: application/json
+Origin: [Redacted]
+Referer: [Redacted]
+Content-Length: 127
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+hash: 123
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted] (893de8da)
+2024-04-17T01:02:02.1524279+02:00 0HN2UD4K1FF2F:00000013 [INF] Entity Framework Core "6.0.0" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer":"6.0.0"' with options: "None" (d2805559)
+2024-04-17T01:02:02.1616840+02:00 0HN2UD4K1FF2F:00000013 [INF] RequestBody: "{
+  \"externalTransactionId\": \"string\",
+  \"userId\": \"8615a2df-a743-440c-8dd1-1405b4b79405\",
+  \"amount\": 0,
+  \"currency\": \"USD\"
+}" (6d42d084)
+2024-04-17T01:02:02.1719925+02:00 0HN2UD4K1FF2F:00000013 [INF] Response:
+StatusCode: 400
+Content-Type: text/plain; charset=utf-8 (999214c4)
+2024-04-17T01:02:02.1722580+02:00 0HN2UD4K1FF2F:00000013 [INF] ResponseBody: "Transaction hash validation failed." (c7a8e6fd)
+2024-04-17T01:02:14.5631840+02:00 0HN2UD4K1FF2F:00000015 [INF] Request:
+Protocol: HTTP/2
+Method: POST
+Scheme: https
+PathBase: 
+Path: /createHash
+Accept: */*
+Host: localhost:7144
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9,sr;q=0.8
+Content-Type: application/json
+Origin: [Redacted]
+Referer: [Redacted]
+Content-Length: 127
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted] (893de8da)
+2024-04-17T01:02:14.5675275+02:00 0HN2UD4K1FF2F:00000015 [INF] Entity Framework Core "6.0.0" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer":"6.0.0"' with options: "None" (d2805559)
+2024-04-17T01:02:14.5677390+02:00 0HN2UD4K1FF2F:00000015 [INF] RequestBody: "{
+  \"externalTransactionId\": \"string\",
+  \"userId\": \"8615a2df-a743-440c-8dd1-1405b4b79405\",
+  \"amount\": 0,
+  \"currency\": \"USD\"
+}" (6d42d084)
+2024-04-17T01:02:14.5692306+02:00 0HN2UD4K1FF2F:00000015 [INF] Response:
+StatusCode: 200
+Content-Type: text/plain; charset=utf-8 (999214c4)
+2024-04-17T01:02:14.5697611+02:00 0HN2UD4K1FF2F:00000015 [INF] ResponseBody: "8QpCq0DDwKxx9q9gf+4uhT83w4kufhe5tBeaJRwP5Dw=" (c7a8e6fd)
+2024-04-17T01:02:22.7424149+02:00 0HN2UD4K1FF2F:00000017 [INF] Request:
+Protocol: HTTP/2
+Method: POST
+Scheme: https
+PathBase: 
+Path: /createTransaction
+Accept: text/plain
+Host: localhost:7144
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+:method: [Redacted]
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9,sr;q=0.8
+Content-Type: application/json
+Origin: [Redacted]
+Referer: [Redacted]
+Content-Length: 127
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+hash: 8QpCq0DDwKxx9q9gf+4uhT83w4kufhe5tBeaJRwP5Dw=
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-dest: [Redacted] (893de8da)
+2024-04-17T01:02:22.7430717+02:00 0HN2UD4K1FF2F:00000017 [INF] Entity Framework Core "6.0.0" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer":"6.0.0"' with options: "None" (d2805559)
+2024-04-17T01:02:22.7433101+02:00 0HN2UD4K1FF2F:00000017 [INF] RequestBody: "{
+  \"externalTransactionId\": \"string\",
+  \"userId\": \"8615a2df-a743-440c-8dd1-1405b4b79405\",
+  \"amount\": 0,
+  \"currency\": \"USD\"
+}" (6d42d084)
+2024-04-17T01:02:23.0070645+02:00 0HN2UD4K1FF2F:00000017 [INF] Response:
+StatusCode: 200
+Content-Type: application/json; charset=utf-8 (999214c4)
+2024-04-17T01:02:23.0074336+02:00 0HN2UD4K1FF2F:00000017 [INF] ResponseBody: "{\"transactionId\":\"9fb79d30-212d-4edc-ac9c-c146b4bd6267\",\"message\":\"Transaction proceed successfully.\",\"status\":0}" (c7a8e6fd)
+2024-04-17T01:04:19.6311390+02:00  [INF] Application is shutting down... (90f52c38)

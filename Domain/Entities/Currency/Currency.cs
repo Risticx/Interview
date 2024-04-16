@@ -13,8 +13,9 @@ namespace Domain.Entities
         public string Label { get; set; }
 
         public Currency(string label) 
-        {
-            Label = label;
+        { 
+            Label = label; 
         }
+
     }
 }

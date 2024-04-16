@@ -10,7 +10,6 @@ namespace Application.Currency.Queries
         {
             CurrencyRepository = currencyRepository;
         }
-
         public bool currencyExistsByLabel(string label)
         {
             return CurrencyRepository.currencyExistsByLabel(label);

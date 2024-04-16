@@ -10,7 +10,6 @@ namespace Application.Transaction.Queries
         {
             TransactionRepository = transactionRepository;
         }
-
         public Domain.Entities.Transaction GetById(string id) 
         {
             return TransactionRepository.getById(id);

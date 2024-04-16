@@ -10,7 +10,6 @@ namespace Application.User.Queries
         {
             UserRepository = userRepository;
         }
-
         public bool UserExistsById(string id)
         {
             return UserRepository.userExistsById(id);
