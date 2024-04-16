@@ -24,9 +24,11 @@ namespace Presentation.Controllers
         private GetUserQuery GetUserQuery;
         private UserExistsByIdQuery UserExistsByIdQuery;
         private CurrencyExistsByLabelQuery CurrencyExistsByLabelQuery;
+        private readonly ILogger<TransactionController> _logger;
         
-        public TransactionController(CurrencyExistsByLabelQuery currencyExistsByLabelQuery, UserExistsByIdQuery userExistsByIdQuery, CreateTransactionCommand createTransactionCommand, AddTransactionToUserCommand addTransactionToUserCommand, HashValidator hashValidator, GetCurrencyQuery getCurrencyQuery, GetTransactionQuery getTransactionQuery, GetUserQuery getUserQuery)
+        public TransactionController(ILogger<TransactionController> logger, CurrencyExistsByLabelQuery currencyExistsByLabelQuery, UserExistsByIdQuery userExistsByIdQuery, CreateTransactionCommand createTransactionCommand, AddTransactionToUserCommand addTransactionToUserCommand, HashValidator hashValidator, GetCurrencyQuery getCurrencyQuery, GetTransactionQuery getTransactionQuery, GetUserQuery getUserQuery)
         {
+            _logger = logger;
             CurrencyExistsByLabelQuery = currencyExistsByLabelQuery;
             UserExistsByIdQuery = userExistsByIdQuery;
             CreateTransactionCommand = createTransactionCommand;
@@ -50,32 +52,28 @@ namespace Presentation.Controllers
         {
             TransactionResponse response = new TransactionResponse();
 
-            try {
-
-               // 
-                if(!UserExistsByIdQuery.UserExistsById(transactionRequest.UserId))
+            try
+            {
+                if (!UserExistsByIdQuery.UserExistsById(transactionRequest.UserId))
                 {
                     response.Status = TransactionStatus.InvalidPlayer;
                     response.Message = "User not found.";
-                    //throw new UserNotFoundException();
-                    return Ok(response);
-
+                    return BadRequest(response);
                 }
-                //
-                if(!CurrencyExistsByLabelQuery.currencyExistsByLabel(transactionRequest.Currency))
+
+                if (!CurrencyExistsByLabelQuery.currencyExistsByLabel(transactionRequest.Currency))
                 {
                     response.Status = TransactionStatus.InvalidCurrency;
                     response.Message = "Currency not found.";
-                    //throw new CurrencyNotFoundException();
-                    return Ok(response);
+                    return BadRequest(response);
                 }
 
                 string validatedHash = HashValidator.ValidateHash(transactionRequest.ExternalTransactionId, transactionRequest.UserId, transactionRequest.Amount, transactionRequest.Currency);
-                
-                if(hash != validatedHash) 
+                if (hash != validatedHash)
                 {
                     throw new TransactionValidationFailderException();
                 }
+
                 response.Status = TransactionStatus.Success;
                 response.Message = "Transaction proceed successfully.";
                 Currency c = GetCurrencyQuery.GetByLabel(transactionRequest.Currency);
@@ -84,11 +82,14 @@ namespace Presentation.Controllers
                 User u = GetUserQuery.GetById(transactionRequest.UserId);
                 AddTransactionToUserCommand.AddTransactionToUser(u, t);
                 response.TransactionId = tId;
-                return Ok(response);
 
-            } catch(Exception e) {
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
                 return BadRequest(e.Message);
             }
         }
+
     }
 }

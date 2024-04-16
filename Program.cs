@@ -8,6 +8,7 @@ using Application.Validator;
 using Domain.Repositories;
 using Infrastructure;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -32,6 +33,17 @@ builder.Services.AddScoped<CreateCurrencyCommand>();
 builder.Services.AddScoped<UserExistsByIdQuery>();
 builder.Services.AddScoped<CurrencyExistsByLabelQuery>();
 
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields = HttpLoggingFields.All;
+    logging.RequestHeaders.Add("sec-ch-ua");
+    logging.RequestHeaders.Add("hash");
+    logging.ResponseHeaders.Add("my-response-header");
+    logging.MediaTypeOptions.AddText("application/javascript");
+    logging.RequestBodyLogLimit = 4096;
+    logging.ResponseBodyLogLimit = 4096;
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -46,6 +58,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 
