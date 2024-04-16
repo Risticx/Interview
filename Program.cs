@@ -54,7 +54,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 var loggerFactory = app.Services.GetService<ILoggerFactory>();
-loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString());    
+loggerFactory.AddFile(builder.Configuration["Logging:LogFileSettings:LogFilePath"].ToString());    
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
