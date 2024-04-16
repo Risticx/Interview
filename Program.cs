@@ -1,4 +1,7 @@
+using Application.Currency.Commands;
+using Application.Currency.Queries;
 using Application.Transaction.Commands;
+using Application.Transaction.Queries;
 using Application.User.Commands;
 using Application.User.Queries;
 using Application.Validator;
@@ -17,10 +20,17 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 builder.Services.AddScoped<ITransactionRepository, EFTransactionRepository>();
 builder.Services.AddScoped<IUserRepository, EFUserRepository>();
+builder.Services.AddScoped<ICurrencyRepository, EFCurrencyRepository>();
 builder.Services.AddScoped<GetUserQuery>();
 builder.Services.AddScoped<CreateUserCommand>();
 builder.Services.AddScoped<CreateTransactionCommand>();
+builder.Services.AddScoped<AddTransactionToUserCommand>();
 builder.Services.AddScoped<HashValidator>();
+builder.Services.AddScoped<GetTransactionQuery>();
+builder.Services.AddScoped<GetCurrencyQuery>();
+builder.Services.AddScoped<CreateCurrencyCommand>();
+builder.Services.AddScoped<UserExistsByIdQuery>();
+builder.Services.AddScoped<CurrencyExistsByLabelQuery>();
 
 
 builder.Services.AddControllers();

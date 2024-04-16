@@ -21,12 +21,15 @@ namespace Domain.Entities
         [Required]
         public string Email { get; private set; }
 
+        public List<Transaction>? UserTransactions { get; set; }
+
         public User(string username, string name, string lastname, string email) 
         {
             Username = username;
             Name = name;
             Lastname = lastname;
             Email = email;
+            UserTransactions = new List<Transaction>();
         }
         
     }

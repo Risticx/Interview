@@ -22,6 +22,20 @@ namespace Infrastructure.Repositories
             return Context.Users.Any(p => p.Email == email);
         }
 
+        public bool userExistsById(string id) 
+        {
+            return Context.Users.Any(p => p.Id == id);
+        }
+
+        public void addTransaction(User u, Transaction t)
+        {
+            if(u != null) {
+                u.UserTransactions ??= new List<Transaction>();
+                u.UserTransactions.Add(t);
+                Context.SaveChanges();
+            }
+        }
+
         public void save(User u)
         {
             Context.Users.Add(u);

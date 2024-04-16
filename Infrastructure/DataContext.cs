@@ -9,9 +9,12 @@ namespace Infrastructure
 
         public DbSet<User> Users { get; private set; }
 
+        public DbSet<Currency> Currencies { get; private set; }
+
         public DataContext(DbContextOptions options) : base(options) {
             Users = Set<User>();
             Transactions = Set<Transaction>();
+            Currencies = Set<Currency>();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

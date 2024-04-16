@@ -1,3 +1,4 @@
+using Domain.Entities;
 using Domain.Repositories;
 
 namespace Application.Transaction.Commands
@@ -11,9 +12,9 @@ namespace Application.Transaction.Commands
             TransactionRepository = transactionRepository;
         }
 
-        public string? Handle(decimal amount, string message, string currency, int status) 
+        public string? Handle(decimal amount, Domain.Entities.Currency currency, string message, int status) 
         {
-            Domain.Entities.Transaction t = new Domain.Entities.Transaction(amount, message, currency, status);
+            Domain.Entities.Transaction t = new Domain.Entities.Transaction(amount, currency, message, status);
             TransactionRepository.save(t);
             return t.Id;
         }

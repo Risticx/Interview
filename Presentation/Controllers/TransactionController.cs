@@ -1,14 +1,14 @@
 using Application.Transaction.Requests;
 using Application.User.Commands;
 using Application.User.Queries;
-using System.Security.Cryptography;
 using Domain.Entities;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
 using Application.Transaction.Commands;
 using Application.Validator;
 using Application.Transaction.Response;
+using Application.Currency.Queries;
+using Application.Transaction.Queries;
 
 namespace Presentation.Controllers 
 {
@@ -17,12 +17,24 @@ namespace Presentation.Controllers
     public class TransactionController : ControllerBase 
     {
         private CreateTransactionCommand CreateTransactionCommand;
+        private AddTransactionToUserCommand AddTransactionToUserCommand;
         private HashValidator HashValidator;
+        private GetCurrencyQuery GetCurrencyQuery;
+        private GetTransactionQuery GetTransactionQuery;
+        private GetUserQuery GetUserQuery;
+        private UserExistsByIdQuery UserExistsByIdQuery;
+        private CurrencyExistsByLabelQuery CurrencyExistsByLabelQuery;
         
-        public TransactionController(CreateTransactionCommand createTransactionCommand, HashValidator hashValidator)
+        public TransactionController(CurrencyExistsByLabelQuery currencyExistsByLabelQuery, UserExistsByIdQuery userExistsByIdQuery, CreateTransactionCommand createTransactionCommand, AddTransactionToUserCommand addTransactionToUserCommand, HashValidator hashValidator, GetCurrencyQuery getCurrencyQuery, GetTransactionQuery getTransactionQuery, GetUserQuery getUserQuery)
         {
+            CurrencyExistsByLabelQuery = currencyExistsByLabelQuery;
+            UserExistsByIdQuery = userExistsByIdQuery;
             CreateTransactionCommand = createTransactionCommand;
+            AddTransactionToUserCommand = addTransactionToUserCommand;
             HashValidator = hashValidator;
+            GetCurrencyQuery = getCurrencyQuery;
+            GetTransactionQuery = getTransactionQuery;
+            GetUserQuery = getUserQuery;
         }
 
         [Route("/createHash")]
@@ -32,24 +44,48 @@ namespace Presentation.Controllers
             return Ok(HashValidator.ValidateHash(transactionRequest.ExternalTransactionId, transactionRequest.UserId, transactionRequest.Amount, transactionRequest.Currency));
         }
 
-
         [Route("/createTransaction")]
         [HttpPost]
         public ActionResult<TransactionResponse> CreateTransaction([FromBody] TransactionRequest transactionRequest, [FromHeader(Name = "Hash")] string hash)
         {
-            string validatedHash = HashValidator.ValidateHash(transactionRequest.ExternalTransactionId, transactionRequest.UserId, transactionRequest.Amount, transactionRequest.Currency);
-            if(hash != validatedHash) 
-            {
-                return BadRequest("Hash validation failed.");
-            }
-            else
-            {
-                string? tId = CreateTransactionCommand.Handle(transactionRequest.Amount, "Aa", transactionRequest.Currency, 0);
-                TransactionResponse r = new TransactionResponse(tId!, "Aa", 0);
-                return Ok(r);
-            }
+            TransactionResponse response = new TransactionResponse();
 
+            try {
+
+               // 
+                if(!UserExistsByIdQuery.UserExistsById(transactionRequest.UserId))
+                {
+                    response.Status = TransactionStatus.InvalidPlayer;
+                    response.Message = "User not found.";
+                    throw new UserNotFoundException();
+                }
+                //
+                if(!CurrencyExistsByLabelQuery.currencyExistsByLabel(transactionRequest.Currency))
+                {
+                    response.Status = TransactionStatus.InvalidCurrency;
+                    response.Message = "Currency not found.";
+                    throw new CurrencyNotFoundException();
+                }
+
+                string validatedHash = HashValidator.ValidateHash(transactionRequest.ExternalTransactionId, transactionRequest.UserId, transactionRequest.Amount, transactionRequest.Currency);
+                
+                if(hash != validatedHash) 
+                {
+                    throw new TransactionValidationFailderException();
+                }
+                response.Status = TransactionStatus.Success;
+                response.Message = "Transaction proceed successfully.";
+                Currency c = GetCurrencyQuery.GetByLabel(transactionRequest.Currency);
+                string? tId = CreateTransactionCommand.Handle(transactionRequest.Amount, c, response.Message, (int)response.Status);
+                Transaction t = GetTransactionQuery.GetById(tId!);
+                User u = GetUserQuery.GetById(transactionRequest.UserId);
+                AddTransactionToUserCommand.AddTransactionToUser(u, t);
+                response.TransactionId = tId;
+                return Ok(response);
+
+            } catch(Exception e) {
+                return NotFound(e.Message);
+            }
         }
     }
-
 }
