@@ -57,14 +57,17 @@ namespace Presentation.Controllers
                 {
                     response.Status = TransactionStatus.InvalidPlayer;
                     response.Message = "User not found.";
-                    throw new UserNotFoundException();
+                    //throw new UserNotFoundException();
+                    return Ok(response);
+
                 }
                 //
                 if(!CurrencyExistsByLabelQuery.currencyExistsByLabel(transactionRequest.Currency))
                 {
                     response.Status = TransactionStatus.InvalidCurrency;
                     response.Message = "Currency not found.";
-                    throw new CurrencyNotFoundException();
+                    //throw new CurrencyNotFoundException();
+                    return Ok(response);
                 }
 
                 string validatedHash = HashValidator.ValidateHash(transactionRequest.ExternalTransactionId, transactionRequest.UserId, transactionRequest.Amount, transactionRequest.Currency);
@@ -84,7 +87,7 @@ namespace Presentation.Controllers
                 return Ok(response);
 
             } catch(Exception e) {
-                return NotFound(e.Message);
+                return BadRequest(e.Message);
             }
         }
     }
