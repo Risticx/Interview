@@ -1,3 +1,5 @@
+using Application.User.Commands;
+using Application.User.Queries;
 using Domain.Repositories;
 using Infrastructure;
 using Infrastructure.Repositories;
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 builder.Services.AddScoped<ITransactionRepository, EFTransactionRepository>();
 builder.Services.AddScoped<IUserRepository, EFUserRepository>();
+builder.Services.AddScoped<GetUserQuery>();
+builder.Services.AddScoped<CreateUserCommand>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

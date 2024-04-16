@@ -17,10 +17,17 @@ namespace Infrastructure.Repositories
             return Context.Users.Where(p => p.Id == id).FirstOrDefault() ?? throw new UserNotFoundException();
         }
 
+        public bool userExistsByEmail(string email)
+        {
+            return Context.Users.Any(p => p.Email == email);
+        }
+
         public void save(User u)
         {
             Context.Users.Add(u);
             Context.SaveChanges();
         }
+
+        
     }
 }
